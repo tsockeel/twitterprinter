@@ -18,7 +18,7 @@ access_token_secret="SMgEXc4mco4F0oShUhJ0RtUgtTP9EnhGBM5D6vo8FDqrf"
 
 current_dir = ""
 
-
+# Save media from url to "(htag)/media_name"
 def save_pic_from_url(url):
 	file_name = url.split('/')[-1]
 
@@ -62,13 +62,15 @@ if __name__ == '__main__':
 			print "Enter a tag name as argument"
 			sys.exit()
 
-
 	l = StdOutListener()
 	auth = OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
 
+	# Create directory to save media
 	if not os.path.exists(tagname):
 		os.makedirs(tagname)
+		
 	current_dir = tagname + '/'
+	
 	stream = Stream(auth, l)
 	stream.filter(track=[tagname])
